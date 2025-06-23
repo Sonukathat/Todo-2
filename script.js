@@ -55,8 +55,6 @@ function addTask() {
                 task.textContent = pro;
 
                 arr = arr.map((ele) => {
-                    // console.log("update", currentId);
-
                     if (ele.id === currentId) {
                         return { ...ele, task: pro };
                     }
@@ -66,22 +64,20 @@ function addTask() {
         })
 
         chek.addEventListener("click", function () {
-            // task.style.textDecoration = chek.checked ? "line-through" : "none";
 
             if (chek.checked) {
                 section2.appendChild(taskdiv);
-                // if(arr.completed==true)
+
                 arr.forEach(item => {
                     item.completed = true;
-                    // console.log("");
-                    
+                    // console.log("");                    
                 });
             } else {
                 section1.appendChild(taskdiv);
                 arr.forEach(item => {
                     item.completed = false;
                     // console.log("");
-                    
+
                 });
             }
         })
@@ -125,14 +121,21 @@ window.addEventListener('load', () => {
 
 
             })
+
+            if (obj.completed == true) {
+                chek.checked = true;
+                section2.appendChild(taskdiv);
+            }
             chek.addEventListener("click", function () {
-                // task.style.textDecoration = chek.checked ? "line-through" : "none";
+
 
                 if (chek.checked) {
                     section2.appendChild(taskdiv);
+                    obj.completed = true;
 
                 } else {
                     section1.appendChild(taskdiv);
+                    obj.completed = false;
                 }
             })
 
@@ -160,7 +163,14 @@ saveBtn.addEventListener("click", function () {
     let data = JSON.stringify(arr)
     // console.log(data);
     // console.log(data);
+    saveBtn.style.backgroundColor = "#22c55e"; 
+    saveBtn.innerText = "Saved";
 
+    
+    setTimeout(() => {
+        saveBtn.style.backgroundColor = "#3b82f6";
+        saveBtn.innerText = "Save";
+    }, 500);
     localStorage.setItem("Task", data);
 
 })
